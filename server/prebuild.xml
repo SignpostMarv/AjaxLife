@@ -31,7 +31,7 @@
         <NoStdLib>false</NoStdLib>
       </Options>
     </Configuration>
-    <Project frameworkVersion="v3_5" name="AjaxLife" path="./">
+    <Project frameworkVersion="v4_5" name="AjaxLife" path="./">
       <Configuration name="Debug">
         <Options>
           <OutputPath>bin/</OutputPath>
@@ -44,6 +44,7 @@
       </Configuration>
       <ReferencePath>assemblies/</ReferencePath>
       <ReferencePath>assemblies/libopenmetaverse/bin/</ReferencePath>
+      <ReferencePath>assemblies/AjaxLife.Http/bin/</ReferencePath>
       <Reference name="System" />
       <Reference name="System.Core"/>
       <Reference name="System.Data" />
@@ -58,12 +59,15 @@
       <Reference name="OpenMetaverse.StructuredData"/>
       <Reference name="OpenMetaverseTypes"/>
       <Reference name="XMLRPC"/>
+      <Reference name="AjaxLife.Http"/>
+      <Reference name="HttpServer_OpenSim" />
       <Files>
         <Exclude pattern="bin"/>
         <Match pattern="*.cs" recurse="false"/>
         <Match pattern="Html/*.cs" recurse="true"/>
         <Match pattern="Html/Templates/*.cs" recurse="true"/>
-        <Match pattern="Converters/*.cs" recurse="true"/>
+        <Match pattern="Modules/*.cs" recurse="true"/>
+        <Match pattern="Converters/UUIDConverter.cs" recurse="true"/>
         <Match pattern="libopenjpeg-dotnet-*.so" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
         <Match pattern="libopenjpeg-dotnet-*.dylib" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
         <Match pattern="OpenMetaverse.dll.config" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
@@ -74,6 +78,9 @@
         <Match pattern="assemblies/libopenmetaverse/bin/OpenMetaverseTypes.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
         <Match pattern="assemblies/libopenmetaverse/bin/OpenMetaverse.StructuredData.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
         <Match pattern="assemblies/libopenmetaverse/bin/XMLRPC.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
+        <Match pattern="assemblies/AjaxLife.Http/bin/AjaxLife.Http.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
+        <Match pattern="assemblies/AjaxLife.Http/bin/HttpServer_OpenSim.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
+        <Match pattern="assemblies/AjaxLife.Http/bin/BouncyCastle.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
       </Files>
     </Project>
   </Solution>

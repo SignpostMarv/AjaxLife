@@ -4,3 +4,15 @@
 [submodule "server/bin/client"]
 	path = server/bin/client
 	url = https://github.com/SignpostMarv/AjaxLife-client.git
+[submodule "server/assemblies/opensim"]
+	path = server/assemblies/opensim
+	url = https://github.com/SignpostMarv/opensim.git
+[submodule "server/assemblies/opensim-libs"]
+	path = server/assemblies/opensim-libs
+	url = https://github.com/SignpostMarv/opensim-libs.git
+[submodule "server/assemblies/bc-sharp"]
+	path = server/assemblies/bc-sharp
+	url = https://github.com/bcgit/bc-csharp.git
+[submodule "server/assemblies/AjaxLife.Http"]
+	path = server/assemblies/AjaxLife.Http
+	url = https://github.com/SignpostMarv/AjaxLife.Http.git

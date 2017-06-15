@@ -25,6 +25,8 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 #endregion
+using AjaxLife.Http;
+using AjaxLife.HttpRules;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -222,10 +224,11 @@ namespace AjaxLife
             // Create an empty dictionary for the users. This is defined as public further up.
             Users = new Dictionary<Guid, User>();
 
-            // Make a web server!
-            HttpWebServer webserver = new HttpWebServer((args["port"] != null) ? int.Parse(args["port"]) : 8080);
-
             bool startPrivate = true;
+
+            // Make a web server!
+            /*
+            HttpWebServer webserver = new HttpWebServer((args["port"] != null) ? int.Parse(args["port"]) : 8080);
 
             try
             {
@@ -241,9 +244,16 @@ namespace AjaxLife
             {
                 // If we can't make it private, oh well.
             }
+            */
+
+            AjaxLifeHttpServer webserver = new AjaxLifeHttpsServer(
+                (startPrivate ? System.Net.IPAddress.Loopback : System.Net.IPAddress.Any),
+                ((args["port"] != null) ? int.Parse(args["port"]) : 8080)
+            );
+
             if (args["root"] == null)
             {
-                StaticRoot = "http://" + webserver.LocalAddress + (webserver.Port != 80 ? (":" + webserver.Port) : "") + "/client/";
+                StaticRoot = "http://" + webserver.Address + (webserver.Port != 80 ? (":" + webserver.Port) : "") + "/client/";
             }
             if (args["httpsapi"] != null)
             {
@@ -277,6 +287,17 @@ namespace AjaxLife
             RSAp = RSA.ExportParameters(true);
             Console.WriteLine("Generated " + ((args["keylength"] == null) ? 1024 : int.Parse(args["keylength"])) + "-bit key.");
             Console.WriteLine("RSA ready.");
+
+            webserver.AddRule(new Index());
+
+            webserver.AddRule(new FileRule("client/www-root/license.txt", "/client/license.txt"));
+
+            webserver.Start(64);
+
+            System.Threading.Thread.Sleep(System.Threading.Timeout.Infinite);
+
+            /*
+
             // Grab the S3 details off the command line if available.
             S3Config = new Affirma.ThreeSharp.ThreeSharpConfig();
             S3Config.AwsAccessKeyID = (args["s3key"] == null) ? AccessKey : args["s3key"];
@@ -347,6 +368,7 @@ namespace AjaxLife
             // We do this because no more processing takes place in this thread.
             System.Threading.Thread.Sleep(System.Threading.Timeout.Infinite);
             // We never get past this point, so all code past here has been deleted for now.
+            */
         }
 
         // Loop through each user and mark them for deletion if they haven't made a request
