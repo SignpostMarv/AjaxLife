@@ -68,7 +68,7 @@ namespace AjaxLife
         private static string DefaultLoginServer = "";
         private static Dictionary<string, string> LoginServers;
         private static string StaticRoot = "http://static.ajaxlife.net/";
-        private static string ApiRoot = "http://localhost:8080/api/";
+        private static string ApiRoot = "https://127.0.0.1:8080/api/";
         private static string TextureBucket = "";
         private static string TextureRoot = "";
         private static string AccessKey = "";
@@ -253,11 +253,7 @@ namespace AjaxLife
 
             if (args["root"] == null)
             {
-                StaticRoot = "http://" + webserver.Address + (webserver.Port != 80 ? (":" + webserver.Port) : "") + "/client/";
-            }
-            if (args["httpsapi"] != null)
-            {
-                ApiRoot = "https://" + args["httpsapi"];
+                StaticRoot = "https://" + webserver.Address + (webserver.Port != 80 ? (":" + webserver.Port) : "") + "/client/";
             }
             Console.WriteLine("Static root: " + STATIC_ROOT);
 
@@ -288,9 +284,11 @@ namespace AjaxLife
             Console.WriteLine("Generated " + ((args["keylength"] == null) ? 1024 : int.Parse(args["keylength"])) + "-bit key.");
             Console.WriteLine("RSA ready.");
 
+            webserver.AddRule(new DotFileDeniedRule());
+
             webserver.AddRule(new Index());
 
-            webserver.AddRule(new FileRule("client/www-root/license.txt", "/client/license.txt"));
+            webserver.AddRule(new DirectoryRule("client/www-root", "/client"));
 
             webserver.Start(64);
 

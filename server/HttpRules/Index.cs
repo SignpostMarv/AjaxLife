@@ -20,11 +20,9 @@ namespace AjaxLife.HttpRules
 
         public Index(
             List<string> pathToFileOnServer=null,
-            string charset = "; charset=utf-8",
-            string contentType = "text/html"
+            string contentType = "text/html; charset=utf-8"
         ) : base(
             pathToFileOnServer == null ? DefaultPathsToFileOnServer : pathToFileOnServer,
-            charset,
             contentType
         )
         {
