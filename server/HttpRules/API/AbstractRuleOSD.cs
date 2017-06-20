@@ -8,13 +8,13 @@ using System.Net;
 
 namespace AjaxLife.HttpRules.API
 {
-    public abstract class AbstractRule : IRule, ICanHandleRequest
+    public abstract class AbstractRuleOSD : IRule, ICanHandleRequest
     {
         private string apiPath { get; set;}
 
         public abstract string[] Methods { get; }
 
-        public AbstractRule(string path)
+        public AbstractRuleOSD(string path)
         {
             if (path.StartsWith("/") == false)
             {

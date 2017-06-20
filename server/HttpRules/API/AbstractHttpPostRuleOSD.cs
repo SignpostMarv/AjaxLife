@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace AjaxLife.HttpRules.API
 {
-    abstract class AbstractHttpPostRule : AbstractRule
+    abstract class AbstractHttpPostRuleOSD : AbstractRuleOSD
     {
-        public AbstractHttpPostRule(string path) : base(path)
+        public AbstractHttpPostRuleOSD(string path) : base(path)
         {
         }
 

@@ -44,7 +44,7 @@ using Affirma.ThreeSharp.Query;
 
 namespace AjaxLife.HttpRules.API
 {
-    class SendMessage : AbstractHttpPostRule
+    class SendMessage : AbstractHttpPostRuleOSD
     {
         private Dictionary<Guid, User> users;
         private MD5 md5 = MD5CryptoServiceProvider.Create();

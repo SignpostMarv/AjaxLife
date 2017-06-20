@@ -34,7 +34,7 @@ using OpenMetaverse;
 
 namespace AjaxLife.HttpRules.API
 {
-    class LoginDetails : AbstractHttpPostRule
+    class LoginDetails : AbstractHttpPostRuleOSD
     {
         private Dictionary<Guid, User> users;
 

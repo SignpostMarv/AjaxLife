@@ -35,7 +35,7 @@ using System.Linq;
 
 namespace AjaxLife.HttpRules.API
 {
-    public class CreateSession : AbstractRule
+    public class CreateSession : AbstractRuleOSD
     {
         private Dictionary<Guid, User> users;
 
