@@ -48,7 +48,7 @@ namespace AjaxLife.HttpRules.API
 
         public override OSD HandleRequest(IHttpRequest request)
         {
-            OSD data = new OSDString(string.Empty);
+            OSD data = new OSDMap();
 
             try
             {
