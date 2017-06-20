@@ -287,6 +287,8 @@ namespace AjaxLife
             Console.WriteLine("Generated " + ((args["keylength"] == null) ? 1024 : int.Parse(args["keylength"])) + "-bit key.");
             Console.WriteLine("RSA ready.");
 
+            Console.WriteLine("Setting up pages...");
+
             httpServer = webserver;
 
             webserver.AddRule(new DotFileDeniedRule());
@@ -297,27 +299,7 @@ namespace AjaxLife
             webserver.AddRule(new Index(Users));
             webserver.AddRule(new DirectoryRule("client/www-root", "/client"));
 
-            #endregion
-
-            #region API
-
-            webserver.AddRule(new CreateSession(Users));
-            webserver.AddRule(new SendMessage(Users));
-            webserver.AddRule(new EventQueue(Users));
-            webserver.AddRule(new Logout(Users));
-            webserver.AddRule(new Connect(Users));
-            webserver.AddRule(new LoginDetails(Users));
-
-            #endregion
-
-            Console.WriteLine("Loading banlist...");
-            BannedUsers = new BanList(); // Create BanList.
-
-            webserver.Start(64);
-
-            System.Threading.Thread.Sleep(System.Threading.Timeout.Infinite);
-
-            /*
+            #region texture cache
 
             // Grab the S3 details off the command line if available.
             S3Config = new Affirma.ThreeSharp.ThreeSharpConfig();
@@ -341,10 +323,31 @@ namespace AjaxLife
             else
             {
                 TextureRoot = "textures/"; // Set the texture root to ourselves if not using S3.
+                webserver.AddRule(new DirectoryRule("textures", AjaxLife.TEXTURE_CACHE));
                 Console.WriteLine("Using internal server for textures:");
                 Console.WriteLine("\tTexture root: " + TEXTURE_ROOT);
             }
-            Console.WriteLine("Setting up pages...");
+            #endregion
+
+            #endregion
+
+            #region API
+
+            webserver.AddRule(new CreateSession(Users));
+            webserver.AddRule(new SendMessage(Users));
+            webserver.AddRule(new EventQueue(Users));
+            webserver.AddRule(new Logout(Users));
+            webserver.AddRule(new Connect(Users));
+            webserver.AddRule(new LoginDetails(Users));
+
+            #endregion
+
+            Console.WriteLine("Loading banlist...");
+            BannedUsers = new BanList(); // Create BanList.
+
+            #region minihttpd
+
+            /*
             // Set up the root.
             VirtualDirectory root = new VirtualDirectory();
             webserver.Root = root;
@@ -352,34 +355,18 @@ namespace AjaxLife
             // Create the virtual files, passing most of them (except index.html and differentorigin.kat,
             // as they don't need to deal with SL) the Users dictionary. Users is a reference object,
             // so changes are reflected in all the pages. The same goes for individual User objects.
-            root.AddFile(new Html.MainPage("index.html", root, Users));
             root.AddFile(new Html.Proxy("differentorigin.kat", root));
             root.AddFile(new Html.BasicStats("ping.kat", root, Users));
             root.AddFile(new Html.MakeFile("makefile.kat", root));
             root.AddFile(new Html.iPhone("iphone.kat", root));
             root.AddFile("robots.txt");
-            // textures/ is only used if we aren't using S3 for textures.
-            if (!UseS3)
-            {
-                root.AddDirectory(new DriveDirectory("textures", AjaxLife.TEXTURE_CACHE, root));
-            }
-            root.AddDirectory(new DriveDirectory("client", "client/www-root", root));
-            // API stuff.
-            VirtualDirectory api = new VirtualDirectory("api", root);
-            root.AddDirectory(api);
-            api.AddFile(new Html.CreateSession("newsession", api, Users));
-            api.AddFile(new Html.SendMessage("send", api, Users));
-            api.AddFile(new Html.EventQueue("events", api, Users));
-            api.AddFile(new Html.Logout("logout", api, Users));
-            api.AddFile(new Html.Connect("login", api, Users));
-            api.AddFile(new Html.LoginDetails("sessiondetails", api, Users));
+            */
+
             #endregion
-            Console.WriteLine("Loading banlist...");
-            BannedUsers = new BanList(); // Create BanList.
 
             Console.WriteLine("Starting server...");
-            // Start the webserver.
-            webserver.Start();
+            webserver.Start(64);
+
             // Set a timer to call timecheck() every five seconds to check for timed out sessions.
             System.Timers.Timer timer = new System.Timers.Timer(5000);
             timer.AutoReset = true;
@@ -387,9 +374,9 @@ namespace AjaxLife
             timer.Start();
             // Sleep forever. Note that this means nothing after this line ever gets executed.
             // We do this because no more processing takes place in this thread.
+
             System.Threading.Thread.Sleep(System.Threading.Timeout.Infinite);
             // We never get past this point, so all code past here has been deleted for now.
-            */
         }
 
         // Loop through each user and mark them for deletion if they haven't made a request
