@@ -110,7 +110,7 @@ namespace AjaxLife.Html
                     textWriter.Flush();
                     return;
                 }
-                LoginParams login = client.Network.DefaultLoginParams(first, last, pass, "AjaxLife", "Katharine Berry <katharine@katharineberry.co.uk>");
+                LoginParams login = client.Network.DefaultLoginParams(first, last, pass, "AjaxLife", "SignpostMarv <me@signpostmarv.name>");
                 login.Platform = "web";
                 login.Channel = "AjaxLife Release; original IP: " + request.Client.RemoteAddress;
                 login.MAC = AjaxLife.MAC_ADDRESS;

@@ -1,9 +1,9 @@
 *.bak
 *.suo
-AjaxLife.csproj.user
+*.csproj.user
 obj
 bin
 compile.bat
 *.build
-AjaxLife.csproj
+*.csproj
 AjaxLife.sln

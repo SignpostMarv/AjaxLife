@@ -27,6 +27,7 @@
 #endregion
 using AjaxLife.Http;
 using AjaxLife.HttpRules;
+using AjaxLife.HttpRules.API;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -105,6 +106,8 @@ namespace AjaxLife
 
         // Provides ban list functionality
         public static BanList BannedUsers;
+
+        public static AjaxLifeHttpServer httpServer;
 
         // Program start. Just launches the real program.
         static void Main(string[] args)
@@ -284,11 +287,31 @@ namespace AjaxLife
             Console.WriteLine("Generated " + ((args["keylength"] == null) ? 1024 : int.Parse(args["keylength"])) + "-bit key.");
             Console.WriteLine("RSA ready.");
 
+            httpServer = webserver;
+
             webserver.AddRule(new DotFileDeniedRule());
+            webserver.AddRule(new DecoderRule());
 
-            webserver.AddRule(new Index());
+            #region pages
 
+            webserver.AddRule(new Index(Users));
             webserver.AddRule(new DirectoryRule("client/www-root", "/client"));
+
+            #endregion
+
+            #region API
+
+            webserver.AddRule(new CreateSession(Users));
+            webserver.AddRule(new SendMessage(Users));
+            webserver.AddRule(new EventQueue(Users));
+            webserver.AddRule(new Logout(Users));
+            webserver.AddRule(new Connect(Users));
+            webserver.AddRule(new LoginDetails(Users));
+
+            #endregion
+
+            Console.WriteLine("Loading banlist...");
+            BannedUsers = new BanList(); // Create BanList.
 
             webserver.Start(64);
 

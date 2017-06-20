@@ -10,7 +10,7 @@ namespace AjaxLife.HttpRules
 {
     class Index : DynamicStringRule
     {
-        private Dictionary<Guid, User> users = new Dictionary<Guid, User>();
+        private Dictionary<Guid, User> users;
 
         private static List<string> DefaultPathsToFileOnServer = new List<string>
         {
@@ -19,6 +19,7 @@ namespace AjaxLife.HttpRules
         };
 
         public Index(
+            Dictionary<Guid, User> users,
             List<string> pathToFileOnServer=null,
             string contentType = "text/html; charset=utf-8"
         ) : base(
@@ -26,6 +27,7 @@ namespace AjaxLife.HttpRules
             contentType
         )
         {
+            this.users = users;
         }
 
         protected override bool HandleRequest(IHttpRequest request, IHttpResponse response)

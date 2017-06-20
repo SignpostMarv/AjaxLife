@@ -44,7 +44,9 @@
       </Configuration>
       <ReferencePath>assemblies/</ReferencePath>
       <ReferencePath>assemblies/libopenmetaverse/bin/</ReferencePath>
+      <!--
       <ReferencePath>assemblies/AjaxLife.Http/bin/</ReferencePath>
+      -->
       <Reference name="System" />
       <Reference name="System.Core"/>
       <Reference name="System.Data" />
@@ -66,21 +68,153 @@
         <Match pattern="*.cs" recurse="false"/>
         <Match pattern="Html/*.cs" recurse="true"/>
         <Match pattern="Html/Templates/*.cs" recurse="true"/>
-        <Match pattern="Modules/*.cs" recurse="true"/>
+        <Match pattern="HttpRules/*.cs" recurse="true"/>
+        <Match pattern="HttpRules/API/*.cs" recurse="true"/>
         <Match pattern="Converters/UUIDConverter.cs" recurse="true"/>
         <Match pattern="libopenjpeg-dotnet-*.so" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
         <Match pattern="libopenjpeg-dotnet-*.dylib" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
         <Match pattern="OpenMetaverse.dll.config" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
-        <Match pattern="assemblies/*.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
+        <Match pattern="assemblies/Affirma.ThreeSharp.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
+        <Match pattern="assemblies/log4net.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
+        <Match pattern="assemblies/MiniHttpd.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
+        <Match pattern="assemblies/Newtonsoft.Json.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
         <Match pattern="*.txt" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
         <Match pattern="openmetaverse_data/*.tga" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)/openmetaverse_data"/>
         <Match pattern="assemblies/libopenmetaverse/bin/OpenMetaverse.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
         <Match pattern="assemblies/libopenmetaverse/bin/OpenMetaverseTypes.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
         <Match pattern="assemblies/libopenmetaverse/bin/OpenMetaverse.StructuredData.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
         <Match pattern="assemblies/libopenmetaverse/bin/XMLRPC.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
+        <!--
         <Match pattern="assemblies/AjaxLife.Http/bin/AjaxLife.Http.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
         <Match pattern="assemblies/AjaxLife.Http/bin/HttpServer_OpenSim.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
+        -->
         <Match pattern="assemblies/AjaxLife.Http/bin/BouncyCastle.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
+      </Files>
+    </Project>
+    <Project frameworkVersion="v4_5" name="AjaxLife.Http" path="./" type="Library">
+      <Configuration name="Debug">
+        <Options>
+          <OutputPath>./bin/</OutputPath>
+        </Options>
+      </Configuration>
+      <Configuration name="Release">
+        <Options>
+          <OutputPath>./bin/</OutputPath>
+        </Options>
+      </Configuration>
+      <!--
+      <ReferencePath>assemblies/opensim-libs/HttpServer/trunk/HttpServer/bin/Debug/</ReferencePath>
+    -->
+      <ReferencePath>./assemblies/AjaxLife.Http/assemblies/bc-sharp/crypto/bin/Debug/lib/net20/</ReferencePath>
+      <Reference name="System" />
+      <Reference name="BouncyCastle" />
+      <Reference name="HttpServer_OpenSim" />
+      <Files>
+        <Exclude pattern="./assemblies/AjaxLife.Http/bin"/>
+        <Match pattern="./assemblies/AjaxLife.Http/src/*.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/src/HttpRules/*.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/bc-sharp/crypto/bin/Debug/lib/net20/BouncyCastle.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
+        <!--
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/bin/Debug/HttpServer_OpenSim.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
+        -->
+      </Files>
+    </Project>
+    <Project frameworkVersion="v4_0" name="HttpServer_OpenSim" path="./" type="Library">
+      <Configuration name="Debug">
+        <Options>
+          <OutputPath>./bin/</OutputPath>
+        </Options>
+      </Configuration>
+      <Configuration name="Release">
+        <Options>
+          <OutputPath>./bin/</OutputPath>
+        </Options>
+      </Configuration>
+      <Reference name="System" />
+      <Reference name="System.Data" />
+      <Reference name="System.Web" />
+      <Reference name="System.XML" />
+      <Reference name="Xunit" />
+      <ReferencePath>./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/dlls/</ReferencePath>
+      <Files>
+        <Exclude pattern="bin"/>
+        <Exclude pattern="obj"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Authentication/AuthenticationModule.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Authentication/BasicAuthentication.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Authentication/DigestAuthentication.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Check.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/ClientAcceptedEventArgs.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/ComponentProvider.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/ContentTypes.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/ContextTimeoutManager.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/ExceptionHandler.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Exceptions/BadRequestException.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Exceptions/ForbiddenException.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Exceptions/HttpException.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Exceptions/InternalServerException.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Exceptions/NotFoundException.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Exceptions/UnauthorizedException.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/FormDecoders/FormDecoderProvider.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/FormDecoders/HttpMultipart.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/FormDecoders/IFormDecoder.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/FormDecoders/MultipartDecoder.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/FormDecoders/UrlDecoder.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/FormDecoders/XmlDecoder.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Helpers/FormHelper.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Helpers/GetIdTitle.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Helpers/Implementations/PrototypeImp.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Helpers/JSHelper.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Helpers/ObjectForm.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Helpers/ResourceInfo.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Helpers/ResourceManager.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Helpers/WebHelper.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Helpers/XmlHelper.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/HttpClientContext.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/HttpContextFactory.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/HttpFile.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/HttpForm.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/HttpHelper.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/HttpInput.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/HttpInputItem.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/HttpListener.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/HttpListenerBase.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/HttpModules/FileModule.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/HttpModules/HttpModule.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/HttpModules/HttpModuleExceptionEventArgs.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/HttpModules/ResourceFileModule.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/HttpModules/ReverseProxyModule.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/HttpModules/WebSiteModule.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/HttpParam.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/HttpRequest.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/HttpResponse.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/HttpServer.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/IComponentProvider.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/IHttpClientContext.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/IHttpContextHandler.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/IHttpRequest.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/IHttpRequestParser.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/IHttpResponse.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/ILogWriter.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/LocklessQueue.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Method.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Parser/BodyEventArgs.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Parser/HeaderEventArgs.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Parser/HttpRequestParser.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Parser/RequestLineEventArgs.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Parser/RequestParserFactory.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Properties/AssemblyInfo.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/RequestCookie.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/RequestCookies.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/RequestQueue.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/ResponseCookie.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/ResponseCookies.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Rules/IRule.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Rules/RedirectRule.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Rules/RegexRedirectRule.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Sessions/IHttpSession.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Sessions/IHttpSessionStore.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Sessions/MemorySession.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Sessions/MemorySessionStore.cs" recurse="false"/>
       </Files>
     </Project>
   </Solution>
