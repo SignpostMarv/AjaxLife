@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 
-namespace AjaxLife.HttpRules.API
+namespace AjaxLife.HttpRules
 {
     public abstract class AbstractRuleOSD : IRule, ICanHandleRequest
     {
