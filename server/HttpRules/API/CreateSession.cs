@@ -35,24 +35,13 @@ using System.Linq;
 
 namespace AjaxLife.HttpRules.API
 {
-    public class CreateSession : AbstractRuleOSD
+    public class CreateSession : AbstractHttpPostRuleOSD
     {
         private Dictionary<Guid, User> users;
 
         public CreateSession(Dictionary<Guid, User> users) : base("newsession")
         {
             this.users = users;
-        }
-
-        public override string[] Methods
-        {
-            get
-            {
-                return new string[]
-                {
-                    "POST"
-                };
-            }
         }
 
         public override OSD HandleRequest(IHttpRequest request)

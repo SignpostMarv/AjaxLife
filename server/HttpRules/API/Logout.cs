@@ -37,7 +37,7 @@ using OpenMetaverse;
 
 namespace AjaxLife.HttpRules.API
 {
-    class Logout : AbstractHttpPostRule
+    class Logout : AbstractHttpPostRuleOSD
     {
         private Dictionary<Guid, User> users;
 

@@ -38,24 +38,13 @@ using System.Collections.Generic;
 
 namespace AjaxLife.HttpRules.API
 {
-    public class Connect : AbstractRule
+    public class Connect : AbstractHttpPostRuleOSD
     {
         private Dictionary<Guid, User> users;
 
         public Connect(Dictionary<Guid, User> users) : base("login")
         {
             this.users = users;
-        }
-
-        public override string[] Methods
-        {
-            get
-            {
-                return new string[]
-                {
-                    "POST"
-                };
-            }
         }
 
         public override OSD HandleRequest(IHttpRequest request)
