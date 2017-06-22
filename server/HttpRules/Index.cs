@@ -1,6 +1,5 @@
-﻿using HttpServer;
-using HttpServer.HttpModules;
-using HttpServer.Sessions;
+﻿using AjaxLife.Http.Rules;
+using HttpServer;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -48,7 +47,6 @@ namespace AjaxLife.HttpRules
                 System.Security.Cryptography.RSAParameters foo = AjaxLife.RSAp;
                 string challenge = RSACrypto.CreateChallengeString(foo);
                 user.Challenge = challenge;
-                bool bar = false;
                 // Add the session to the users.
                 lock (users) users.Add(key, user);
                 Hashtable hash = new Hashtable();

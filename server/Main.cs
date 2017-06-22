@@ -25,6 +25,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 #endregion
+using AjaxLife.Http.Rules;
 using AjaxLife.Http;
 using AjaxLife.HttpRules;
 using AjaxLife.HttpRules.API;
@@ -330,8 +331,8 @@ namespace AjaxLife
             #endregion
 
             #endregion
-
-            #region API
+        
+            #region HTTP API
 
             webserver.AddRule(new CreateSession(Users));
             webserver.AddRule(new SendMessage(Users));
