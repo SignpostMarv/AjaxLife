@@ -42,11 +42,7 @@
           <OutputPath>bin/</OutputPath>
         </Options>
       </Configuration>
-      <ReferencePath>assemblies/</ReferencePath>
       <ReferencePath>assemblies/libopenmetaverse/bin/</ReferencePath>
-      <!--
-      <ReferencePath>assemblies/AjaxLife.Http/bin/</ReferencePath>
-      -->
       <Reference name="System" />
       <Reference name="System.Core"/>
       <Reference name="System.Data" />
@@ -110,13 +106,11 @@
       <Reference name="BouncyCastle" />
       <Reference name="HttpServer_OpenSim" />
       <Files>
-        <Exclude pattern="./assemblies/AjaxLife.Http/bin"/>
-        <Match pattern="./assemblies/AjaxLife.Http/src/*.cs" recurse="false"/>
-        <Match pattern="./assemblies/AjaxLife.Http/src/HttpRules/*.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/HttpServer.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/HttpsServer.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/ICanHandleRequest.cs" recurse="false"/>
+        <Match pattern="./assemblies/AjaxLife.Http/Rules/*.cs" recurse="false"/>
         <Match pattern="./assemblies/AjaxLife.Http/assemblies/bc-sharp/crypto/bin/Debug/lib/net20/BouncyCastle.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
-        <!--
-        <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/bin/Debug/HttpServer_OpenSim.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
-        -->
       </Files>
     </Project>
     <Project frameworkVersion="v4_0" name="HttpServer_OpenSim" path="./" type="Library">
