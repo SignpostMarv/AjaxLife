@@ -100,7 +100,7 @@
       </Configuration>
       <!--
       <ReferencePath>assemblies/opensim-libs/HttpServer/trunk/HttpServer/bin/Debug/</ReferencePath>
-    -->
+      -->
       <ReferencePath>./assemblies/AjaxLife.Http/assemblies/bc-sharp/crypto/bin/Debug/lib/net20/</ReferencePath>
       <Reference name="System" />
       <Reference name="BouncyCastle" />
