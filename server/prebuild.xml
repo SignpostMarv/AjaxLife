@@ -42,6 +42,7 @@
           <OutputPath>bin/</OutputPath>
         </Options>
       </Configuration>
+      <ReferencePath>assemblies/</ReferencePath>
       <ReferencePath>assemblies/libopenmetaverse/bin/</ReferencePath>
       <Reference name="System" />
       <Reference name="System.Core"/>
@@ -76,15 +77,12 @@
         <Match pattern="assemblies/Newtonsoft.Json.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
         <Match pattern="*.txt" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
         <Match pattern="openmetaverse_data/*.tga" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)/openmetaverse_data"/>
-        <Match pattern="assemblies/libopenmetaverse/bin/OpenMetaverse.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
-        <Match pattern="assemblies/libopenmetaverse/bin/OpenMetaverseTypes.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
-        <Match pattern="assemblies/libopenmetaverse/bin/OpenMetaverse.StructuredData.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
         <Match pattern="assemblies/libopenmetaverse/bin/XMLRPC.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
         <!--
         <Match pattern="assemblies/AjaxLife.Http/bin/AjaxLife.Http.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
         <Match pattern="assemblies/AjaxLife.Http/bin/HttpServer_OpenSim.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
-        -->
         <Match pattern="assemblies/AjaxLife.Http/bin/BouncyCastle.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
+        -->
       </Files>
     </Project>
     <Project frameworkVersion="v4_5" name="AjaxLife.Http" path="./" type="Library">
@@ -110,7 +108,28 @@
         <Match pattern="./assemblies/AjaxLife.Http/HttpsServer.cs" recurse="false"/>
         <Match pattern="./assemblies/AjaxLife.Http/ICanHandleRequest.cs" recurse="false"/>
         <Match pattern="./assemblies/AjaxLife.Http/Rules/*.cs" recurse="false"/>
+        <!--
         <Match pattern="./assemblies/AjaxLife.Http/assemblies/bc-sharp/crypto/bin/Debug/lib/net20/BouncyCastle.dll" recurse="false" buildAction="Copy" copyToOutput="PreserveNewest" destination="$(OutputPath)"/>
+        -->
+      </Files>
+    </Project>
+    <Project frameworkVersion="v2_0" name="BouncyCastle" path="./" type="Library">
+      <Configuration name="Debug">
+        <Options>
+          <OutputPath>./bin/</OutputPath>
+        </Options>
+      </Configuration>
+      <Configuration name="Release">
+        <Options>
+          <OutputPath>./bin/</OutputPath>
+        </Options>
+      </Configuration>
+      <Reference name="System" />
+      <Reference name="System.Data" />
+      <Reference name="System.XML" />
+      <Files>
+        <Match path="./assemblies/AjaxLife.Http/assemblies/bc-sharp/crypto/bzip2/" pattern="*.cs" recurse="true"/>
+        <Match path="./assemblies/AjaxLife.Http/assemblies/bc-sharp/crypto/src/" pattern="*.cs" recurse="true"/>
       </Files>
     </Project>
     <Project frameworkVersion="v4_0" name="HttpServer_OpenSim" path="./" type="Library">
@@ -209,6 +228,97 @@
         <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Sessions/IHttpSessionStore.cs" recurse="false"/>
         <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Sessions/MemorySession.cs" recurse="false"/>
         <Match pattern="./assemblies/AjaxLife.Http/assemblies/opensim-libs/HttpServer/trunk/HttpServer/Sessions/MemorySessionStore.cs" recurse="false"/>
+      </Files>
+    </Project>
+
+    <Project name="OpenMetaverseTypes" path="./" type="Library" rootNamespace="OpenMetaverse" frameworkVersion="v4_0">
+      <Configuration name="Debug">
+        <Options>
+          <OutputPath>./bin/</OutputPath>
+        </Options>
+      </Configuration>
+      <Configuration name="Release">
+        <Options>
+          <OutputPath>../bin/</OutputPath>
+          <XmlDocFile>OpenMetaverseTypes.XML</XmlDocFile>
+        </Options>
+      </Configuration>
+
+      <ReferencePath>./assemblies/</ReferencePath>
+      <ReferencePath>./assemblies/libopenmetaverse/bin/</ReferencePath>
+      <Reference name="System"/>
+      <Reference name="System.Core"/>
+      <Files>
+        <Match pattern="./assemblies/libopenmetaverse/OpenMetaverseTypes/*.cs" recurse="true"/>
+      </Files>
+    </Project>
+
+    <Project name="OpenMetaverse.StructuredData" path="./" type="Library" rootNamespace="OpenMetaverse.StructuredData" frameworkVersion="v4_0">
+      <Configuration name="Debug">
+        <Options>
+          <OutputPath>./bin/</OutputPath>
+        </Options>
+      </Configuration>
+      <Configuration name="Release">
+        <Options>
+          <OutputPath>./bin/</OutputPath>
+          <XmlDocFile>OpenMetaverse.StructuredData.XML</XmlDocFile>
+        </Options>
+      </Configuration>
+
+      <ReferencePath>./assemblies/</ReferencePath>
+      <ReferencePath>./assemblies/libopenmetaverse/bin/</ReferencePath>
+      <Reference name="System"/>
+      <Reference name="System.Xml"/>
+      <Reference name="OpenMetaverseTypes"/>
+      <Files>
+        <Match pattern="./assemblies/libopenmetaverse/OpenMetaverse.StructuredData/*.cs" recurse="false"/>
+        <Match pattern="./assemblies/libopenmetaverse/OpenMetaverse.StructuredData/JSON/*.cs" recurse="false"/>
+        <Match pattern="./assemblies/libopenmetaverse/OpenMetaverse.StructuredData/LLSD/*.cs" recurse="false"/>
+      </Files>
+    </Project>
+
+    <Project name="OpenMetaverse" path="./" type="Library" rootNamespace="OpenMetaverse" frameworkVersion="v4_0">
+      <Configuration name="Debug">
+        <Options>
+          <OutputPath>./bin/</OutputPath>
+        </Options>
+      </Configuration>
+      <Configuration name="Release">
+        <Options>
+          <OutputPath>./bin/</OutputPath>
+          <XmlDocFile>OpenMetaverse.XML</XmlDocFile>
+        </Options>
+      </Configuration>
+
+      <ReferencePath>./assemblies/</ReferencePath>
+      <ReferencePath>./assemblies/libopenmetaverse/bin/</ReferencePath>
+      <Reference name="System"/>
+      <Reference name="System.Core"/>
+      <Reference name="System.Xml"/>
+      <Reference name="System.Data"/>
+      <Reference name="System.Drawing"/>
+      <Reference name="OpenMetaverseTypes"/>
+      <Reference name="OpenMetaverse.StructuredData"/>
+      <Reference name="log4net"/>
+      <Reference name="XMLRPC"/>
+      <Reference name="SmartThreadPool"/>
+      <Reference name="zlib.net" />
+
+      <Files>
+        <Match pattern="./assemblies/libopenmetaverse/OpenMetaverse/*.cs" recurse="false"/>
+        <Match pattern="./assemblies/libopenmetaverse/OpenMetaverse/*.cs" recurse="false"/>
+        <Match pattern="./assemblies/libopenmetaverse/OpenMetaverse/Assets/*.cs" recurse="false"/>
+        <Match pattern="./assemblies/libopenmetaverse/OpenMetaverse/Assets/Archiving/*.cs" recurse="false"/>
+        <Match pattern="./assemblies/libopenmetaverse/OpenMetaverse/Assets/AssetTypes/*.cs" recurse="false"/>
+        <Match pattern="./assemblies/libopenmetaverse/OpenMetaverse/Capabilities/*.cs" recurse="false"/>
+        <Match pattern="./assemblies/libopenmetaverse/OpenMetaverse/Imaging/*.cs" recurse="false"/>
+        <Match pattern="./assemblies/libopenmetaverse/OpenMetaverse/ImportExport/*.cs" recurse="false"/>
+        <Match pattern="./assemblies/libopenmetaverse/OpenMetaverse/Interfaces/*.cs" recurse="false"/>
+        <Match pattern="./assemblies/libopenmetaverse/OpenMetaverse/Messages/*.cs" recurse="false"/>
+        <Match pattern="./assemblies/libopenmetaverse/OpenMetaverse/Primitives/*.cs" recurse="false"/>
+        <Match pattern="./assemblies/libopenmetaverse/OpenMetaverse/Rendering/*.cs" recurse="false"/>
+        <Match pattern="./assemblies/libopenmetaverse/OpenMetaverse/Voice/*.cs" recurse="false"/>
       </Files>
     </Project>
   </Solution>
